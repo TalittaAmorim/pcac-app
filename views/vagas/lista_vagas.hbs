@@ -1,0 +1,51 @@
+<div class="page-container jobs-list-page">
+    <div class="jobs-list-header">
+        <h1>Encontre Sua Vaga</h1>
+        <p class="section-subtitle">Navegue pelas oportunidades e dê o primeiro passo na sua carreira tech!</p>
+    </div>
+
+    <section class="search-filter-bar">
+        <form action="/vagas" method="GET" class="job-search-form">
+            <div class="form-group-keywords">
+                <input type="text" name="keywords" placeholder="Cargo, tecnologia, habilidade..." value="{{query.keywords}}">
+            </div>
+            <button type="submit" class="btn btn-search-jobs">Buscar Vagas</button>
+        </form>
+    </section>
+
+    <section class="job-listings-section">
+        {{#if vagas.length}}
+            <p class="jobs-found-count">{{vagas.length}} vaga(s) encontrada(s).</p>
+            <div class="job-cards-grid">
+                {{#each vagas}}
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <div class="job-card-logo-placeholder">
+                            <span>{{#if this.empresa}}{{substring this.empresa 0 1}}{{else}}P{{/if}}</span>
+                        </div>
+                        <div class="job-card-title-group">
+                            <h3 class="job-title"><a href="/vagas/{{this.id}}">{{this.titulo}}</a></h3>
+                            <p class="job-company">{{#if this.empresa}}{{this.empresa}}{{else}}Empresa Confidencial{{/if}}</p>
+                        </div>
+                        </div>
+                    <div class="job-card-body">
+                        <p class="job-location"><strong>Localização:</strong> {{this.localizacao}}</p>
+                        <p class="job-description-snippet">
+                            {{#if this.descricao}}
+                                {{substring this.descricao 0 100}}...
+                            {{else}}
+                                Descrição não fornecida.
+                            {{/if}}
+                        </p>
+                    </div>
+                    <div class="job-card-footer">
+                         <a href="/vagas/{{this.id}}" class="btn btn-view-details">Ver Detalhes</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <p class="no-jobs-found">Nenhuma vaga encontrada com os critérios atuais. Tente uma busca diferente!</p>
+        {{/if}}
+    </section>
+</div>

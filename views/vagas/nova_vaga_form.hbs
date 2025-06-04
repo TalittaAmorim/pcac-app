@@ -1,0 +1,55 @@
+<div class="page-container form-page">
+    <div class="form-header">
+        <h1>Publicar Nova Vaga</h1>
+        <p class="section-subtitle">Preencha os detalhes abaixo para divulgar sua oportunidade na PCAC.</p>
+    </div>
+
+    {{#if erro}}
+        <div class="alert alert-danger">
+            <p>{{erro}}</p>
+        </div>
+    {{/if}}
+    {{#if sucesso}}
+        <div class="alert alert-success">
+            <p>{{sucesso}}</p>
+        </div>
+    {{/if}}
+
+    <form action="/vagas" method="POST" class="styled-form">
+        <div class="form-group">
+            <label for="titulo">Título da Vaga <span class="required-field">*</span></label>
+            <input type="text" id="titulo" name="titulo" value="{{vaga.titulo}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="empresa">Nome da Empresa</label>
+            <input type="text" id="empresa" name="empresa" value="{{vaga.empresa}}">
+            <small>Será preenchido ou confirmado pela validação do CNPJ, se disponível.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="cnpj_empresa">CNPJ da Empresa <span class="required-field">*</span></label>
+            <input type="text" id="cnpj_empresa" name="cnpj_empresa" value="{{vaga.cnpj_empresa}}" required placeholder="00.000.000/0000-00">
+             <small>Usamos a BrasilAPI para validar o CNPJ e garantir a autenticidade.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="localizacao">Localização (Ex: Salvador/BA, Remoto, Híbrido)</label>
+            <input type="text" id="localizacao" name="localizacao" value="{{vaga.localizacao}}">
+        </div>
+
+        <div class="form-group">
+            <label for="email_contato">E-mail para Contato/Aplicação <span class="required-field">*</span></label>
+            <input type="email" id="email_contato" name="email_contato" value="{{vaga.email_contato}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição Completa da Vaga <span class="required-field">*</span></label>
+            <textarea id="descricao" name="descricao" rows="8" required>{{vaga.descricao}}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-submit-form">Publicar Vaga</button>
+        </div>
+    </form>
+</div>

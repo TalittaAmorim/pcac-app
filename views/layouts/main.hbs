@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{paginaTitulo}} - PCAC</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    {{!-- Condição para mostrar o Header --}}
+    {{#unless hideHeader}}  <header class="site-header"> 
+            {{> header }} 
+        </header>
+    {{/unless}}
+
+    <main class="container">
+        {{{body}}} 
+    </main>
+
+    {{!-- Condição para mostrar o Footer --}}
+    {{#unless hideFooter}} <footer class="site-footer">
+            <p>&copy; {{currentYear}} PCAC. Todos os direitos reservados.</p>
+        </footer>
+    {{/unless}}
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
