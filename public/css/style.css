@@ -147,7 +147,7 @@ a:hover {
 }
 
 .hero-section-new {
-    background-image: linear-gradient(120deg, var(--color-primary), #ffb405); /* Azul Escuro e Amarelo */
+    background-image: linear-gradient(120deg,#fff, #596a95, var(--color-primary)); /* Azul Escuro e Amarelo */
     background-size: 400% 400%; /* Tamanho grande para ver o movimento das cores */
     color: var(--color-text-light);
     padding: 70px 0;
@@ -502,20 +502,14 @@ a:hover {
     margin-bottom: 0;
 }
 
-/* Reutilizando e adaptando o estilo do .about-item-card da home, 
-   mas talvez queiramos que ele seja um pouco diferente aqui.
-   Se o .about-item-card da home já estiver bom, estas regras podem não ser necessárias
-   ou podem ser para ajustar especificidades da página /sobre.
-   Para este exemplo, vou assumir que o estilo anterior de .about-item-card
-   (com fundo, borda, etc.) já se aplica bem.
-   A classe .icon-svg-large é só para caso você queira ícones maiores nesta página. */
+
 
 .icon-svg-large {
     width: 40px; /* Ícones um pouco maiores para a página Sobre */
     height: 40px;
 }
 
-.about-card { /* Se você usar essa classe em vez de about-item-card na página sobre.hbs */
+.about-card { 
     background-color: var(--color-bg-card);
     border: 1px solid #e9ecef;
     border-left: 4px solid var(--color-secondary);
@@ -786,7 +780,7 @@ a:hover {
 
 /* Em: public/css/style.css */
 
-/* ... (seus estilos anteriores) ... */
+
 
 /* Estilos para Páginas de Formulário */
 .form-page { /* Similar ao .page-container, mas pode ter ajustes */
@@ -900,4 +894,107 @@ a:hover {
 }
 .btn-submit-form:hover {
     background-color: #e0ac1e; /* Amarelo mais escuro */
+}
+
+/* Em: public/css/style.css */
+
+/* ... (seus estilos anteriores) ... */
+
+/* --- Estilos para a Página de Detalhes da Vaga --- */
+.job-detail-page {
+    /* Esta classe pode herdar os estilos de .page-container que já definimos */
+}
+
+.job-detail-header {
+    text-align: center;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--color-bg-light);
+}
+
+.job-detail-header h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.3em;
+}
+
+.job-detail-header .company-name {
+    font-size: 1.3em;
+    font-weight: 400; /* Fonte mais leve para o nome da empresa */
+    color: var(--color-text-muted);
+    margin-bottom: 15px;
+}
+
+.job-meta {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Espaço entre os itens */
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.job-detail-body,
+.job-detail-apply,
+.job-detail-company-info {
+    margin-bottom: 30px;
+}
+
+.job-detail-body h3,
+.job-detail-apply h3,
+.job-detail-company-info h3 {
+    font-size: 1.4em;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--color-accent); /* Linha de destaque amarela */
+    display: inline-block; /* Faz a borda ficar apenas no tamanho do texto */
+}
+
+.job-description-content {
+    line-height: 1.8; /* Um pouco mais de espaço entre linhas para textos longos */
+    color: var(--color-text-dark);
+}
+
+.job-description-content p { /* Estilo para parágrafos dentro da descrição */
+    margin-bottom: 1em;
+}
+
+.job-description-content ul,
+.job-description-content ol {
+    margin-left: 20px;
+    margin-bottom: 1em;
+}
+
+.back-link-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btn-back {
+    color: var(--color-secondary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.btn-back:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* Responsividade para a página de detalhes */
+@media (max-width: 768px) {
+    .job-detail-header h1 {
+        font-size: 1.8em;
+    }
+    .job-detail-header .company-name {
+        font-size: 1.1em;
+    }
+    .job-meta {
+        flex-direction: column; /* Empilha os meta itens */
+        gap: 8px; /* Menor espaço quando empilhado */
+    }
 }

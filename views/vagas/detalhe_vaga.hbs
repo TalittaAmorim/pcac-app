@@ -1,0 +1,49 @@
+<div class="page-container job-detail-page">
+
+    {{#if sucesso}}
+    <div class="alert alert-success">
+        <p>{{sucesso}}</p>
+    </div>
+    {{/if}}
+
+    {{#if vaga}}
+    <div class="job-detail-header">
+        <h1>{{vaga.titulo}}</h1>
+        <h2 class="company-name">{{vaga.empresa}}</h2>
+        <div class="job-meta">
+            <span class="meta-item">📍 {{vaga.localizacao}}</span>
+            <span class="meta-item">📅 Publicado em: {{formatDate vaga.data_publicacao}}</span>
+        </div>
+    </div>
+
+    <div class="job-detail-body">
+        <h3>Descrição Completa da Vaga</h3>
+        <div class="job-description-content">
+            {{{vaga.descricao}}}
+        </div>
+    </div>
+
+    <div class="job-detail-apply">
+        <h3>Como se Candidatar</h3>
+        <p>Interessado? Envie seu currículo ou entre em contato através do e-mail: <a href="mailto:{{vaga.email_contato}}">{{vaga.email_contato}}</a></p>
+    </div>
+
+    <div class="job-detail-company-info">
+        <h3>Informações da Empresa</h3>
+        <p><strong>CNPJ:</strong> {{vaga.cnpj_empresa}}</p>
+    </div>
+
+    <div class="back-link-container">
+        <a href="/vagas" class="btn btn-back">← Voltar para Todas as Vagas</a>
+    </div>
+
+    {{else}}
+    <div class="job-detail-header">
+        <h1>Vaga não encontrada</h1>
+        <p>O link que você acessou parece estar quebrado ou a vaga foi removida.</p>
+        <div class="back-link-container">
+            <a href="/vagas" class="btn btn-back">← Voltar para Todas as Vagas</a>
+        </div>
+    </div>
+    {{/if}}
+</div>
