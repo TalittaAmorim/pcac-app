@@ -3,7 +3,7 @@ const path = require('path'); // dependência para n ter problemas com caminhos
 
 const BANCO = 'banco_vagas.sqlite'
 
-const bancoFile = process.env.RENDER
+const bancoFile = process.env.PROJECT_DOMAIN
     ? `/var/data/${BANCO}`
     : path.resolve(__dirname, '..', BANCO);
 
