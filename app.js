@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORTA = 3002;
+const PORTA = process.env.PORT || 3002;
 const vagasRoutes = require('./routes/vagasRotas'); 
 const path = require('path');
 const { engine } = require('express-handlebars'); 
@@ -9,14 +9,14 @@ const db = require('./config/conexao.js')
 
 
 app.engine(
-    'hbs', // Define um nome para o motor de template (vamos usar 'hbs')
+    'hbs', // Define um nome para o motor de template
     engine({ // Chama a função 'engine' que importamos, passando um objeto de configuração
-        extname: '.hbs', // Define qual extensão de arquivo seus templates Handlebars usarão (ex: home.hbs)
-        defaultLayout: 'main', // Nome do arquivo de layout principal que será usado por padrão
+        extname: '.hbs', 
+        defaultLayout: 'main',
                                // Ele vai procurar por views/layouts/main.hbs
         layoutsDir: path.join(__dirname, 'views/layouts'), // Caminho completo para a pasta onde seus layouts estão
                                                            // __dirname é a pasta atual (onde app.js está)
-        partialsDir: path.join(__dirname, 'views/partials'), // Caminho completo para a pasta dos seus partials
+        partialsDir: path.join(__dirname, 'views/partials'), 
         helpers: { // (Opcional, mas útil) Define funções auxiliares para usar nos templates
             currentYear: () => {
                 return new Date().getFullYear();
@@ -27,7 +27,8 @@ app.engine(
                 return new Date(dateString).toLocaleDateString('pt-BR', options);
             },
 
-            substring: function(string, start, end) { // Novo helper
+            substring: function(string, start, end) { 
+                
         if (string && typeof string === 'string') {
             return string.substring(start, end);
         }
@@ -48,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', (req, res) => {
-//   res.send('Bem-vindo à casa PCAC! Ainda estamos arrumando as coisas por dentro!');
+
   res.render('home', {
     paginaTitulo: "Bem vindo"
   })

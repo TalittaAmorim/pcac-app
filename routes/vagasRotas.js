@@ -2,38 +2,32 @@ const express = require("express");
 const router = express.Router();
 const Job = require("../models/Job");
 
-router.get("/", async (req, res) => {
-  console.log("LOG: Requisição recebida em GET /vagas");
-  try {
-    const queryKeywords = req.query.keywords;
-    let todasAsVagas;
+router.get('/', async (req, res) => {
+    console.log("LOG: Requisição recebida em GET /vagas");
+    try {
+        // 1. Pega as keywords da URL, se existirem.
+        const queryKeywords = req.query.keywords;
 
-    if (queryKeywords) {
-      console.log(`LOG: Buscando por keywords: ${queryKeywords}`);
-      todasAsVagas = await Job.getAll();
-    } else {
-      todasAsVagas = await Job.getAll();
+        // 2. Passa as keywords diretamente para o nosso Model.
+        // Se queryKeywords for 'undefined', o Model saberá buscar tudo.
+        // Se tiver um valor, o Model saberá filtrar.
+        const vagas = await Job.getAll(queryKeywords);
+
+        console.log(`LOG: Encontradas ${vagas ? vagas.length : 0} vagas para a busca.`);
+        res.render('vagas/lista_vagas', { 
+            vagas: vagas, 
+            paginaTitulo: 'Encontre sua Vaga na PCAC',
+            query: req.query
+        });
+    } catch (err) {
+        console.error("LOG: Erro na rota GET /vagas:", err.message);
+        res.status(500).render('error', { 
+            mensagemErro: "Ops! Algo deu errado ao buscar as vagas.",
+            paginaTitulo: "Erro"
+        });
     }
-
-    console.log(
-      "LOG: Vagas encontradas:",
-      todasAsVagas ? todasAsVagas.length : 0
-    );
-    res.render("vagas/lista_vagas", {
-      vagas: todasAsVagas,
-      paginaTitulo: "Encontre sua Vaga na PCAC",
-      query: req.query,
-      layout: "main",
-    });
-  } catch (err) {
-    console.error("LOG: Erro na rota GET /vagas:", err.message, err.stack);
-    res.status(500).render("error", {
-      mensagemErro: "Ops! Algo deu errado ao buscar as vagas.",
-      paginaTitulo: "Erro",
-      layout: "main",
-    });
-  }
 });
+
 
 router.get("/nova_vaga_form", async (req, res) => {
   console.log("LOG: Requisição recebida em GET /vagas/nova");

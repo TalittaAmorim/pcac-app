@@ -1,18 +1,29 @@
 const db = require('../config/conexao');
 
 const Job = {
-    getAll: () =>{
-        return new Promise((resolve,reject) => {
-            const sql = "SELECT * FROM vagas ORDER BY data_publicacao DESC";
-            db.all(sql, [], (err,rows) =>{
-                if(err){
-                    console.log("Erro ao buscar todas as vagas no model: ", err.message);
+
+    getAll: (keywords) => {
+        return new Promise((resolve, reject) => {
+            let sql = "SELECT * FROM vagas";
+            const params = [];
+
+            if (keywords) {
+                // Se recebemos keywords, modificamos a query SQL para filtrar
+                sql += " WHERE titulo LIKE ? OR descricao LIKE ?"; // Adiciona a condição de busca
+                params.push(`%${keywords}%`, `%${keywords}%`); // Adiciona os valores para os '?'
+            }
+
+            sql += " ORDER BY data_publicacao DESC"; // Adiciona a ordenação no final
+
+            db.all(sql, params, (err, rows) => {
+                if (err) {
+                    console.error("Erro ao buscar vagas no model:", err.message);
                     reject(err);
-                }else{
-                    resolve(rows)
+                } else {
+                    resolve(rows);
                 }
-            })
-        })
+            });
+        });
     },
 
     getById: (id) =>{

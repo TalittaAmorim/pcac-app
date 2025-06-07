@@ -118,7 +118,7 @@ a:hover {
     text-decoration: none;
 }
 
-.btn-contact-header {
+#btn-contact-header {
     background-color: var(--color-accent);
     color: var(--color-primary) !important;
     padding: 9px 18px;
@@ -128,7 +128,7 @@ a:hover {
     font-size: 0.95em;
     margin-left: 20px;
 }
-.btn-contact-header:hover {
+#btn-contact-header:hover {
     background-color: #e0ac1e;
     color: var(--color-primary) !important;
     text-decoration: none;
@@ -896,14 +896,10 @@ a:hover {
     background-color: #e0ac1e; /* Amarelo mais escuro */
 }
 
-/* Em: public/css/style.css */
 
-/* ... (seus estilos anteriores) ... */
 
 /* --- Estilos para a Página de Detalhes da Vaga --- */
-.job-detail-page {
-    /* Esta classe pode herdar os estilos de .page-container que já definimos */
-}
+
 
 .job-detail-header {
     text-align: center;

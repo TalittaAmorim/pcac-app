@@ -3,7 +3,9 @@ const path = require('path'); // dependência para n ter problemas com caminhos
 
 const BANCO = 'banco_vagas.sqlite'
 
-const bancoFile = path.resolve(__dirname, '..', BANCO); // garantindo que ele fique na pasta raiz do projeto
+const bancoFile = process.env.RENDER
+    ? `/var/data/${BANCO}`
+    : path.resolve(__dirname, '..', BANCO);
 
 const db = new sqlite3.Database(bancoFile, (err) =>{
     if (err) {
