@@ -79,6 +79,7 @@ A aplicação está hospedada na plataforma [**Fly.io**](https://fly.io/), escol
 
 ![image](https://github.com/user-attachments/assets/6c539b56-e624-45d4-8df8-93e3c85ca143)
 
+![image](https://github.com/user-attachments/assets/3dcfa959-3754-439d-934c-efa50a3e1965)
 
 
 Desenvolvido com entusiasmo como parte de um desafio de aprendizado de 7 dias.
