@@ -66,7 +66,9 @@ app.get('/sobre', (req, res) => {
 app.use('/vagas', vagasRoutes); // MONTA AS ROTAS DE VAGAS NO CAMINHO /vagas
 
 
-app.listen(PORTA, () => {
-  console.log(` oba! A casa PCAC abriu na porta ${PORTA}! Visite em http://localhost:${PORTA}`);
+const host = '0.0.0.0';
+
+app.listen(PORTA, host, () => {
+    console.log(`🎉 oba! A casa PCAC abriu na porta <span class="math-inline">\{PORTA\}\! Visite em http\://</span>{host}:${PORTA}`);
 });
 
