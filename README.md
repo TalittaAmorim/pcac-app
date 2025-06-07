@@ -77,6 +77,8 @@ A aplicação está hospedada na plataforma [**Fly.io**](https://fly.io/), escol
 * [ ] Adição de testes automatizados (unitários e de integração).
 * [ ] Migração para um banco de dados cliente-servidor como PostgreSQL para maior escalabilidade.
 
----
+![image](https://github.com/user-attachments/assets/6c539b56-e624-45d4-8df8-93e3c85ca143)
+
+
 
 Desenvolvido com entusiasmo como parte de um desafio de aprendizado de 7 dias.
