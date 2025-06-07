@@ -1,23 +1,32 @@
 const sqlite3 = require('sqlite3').verbose();
-const path = require('path'); // dependência para n ter problemas com caminhos
+const path = require('path');
 
-const BANCO = 'banco_vagas.sqlite'
+const DB_FILE_NAME = 'pcac_database.sqlite';
 
-const bancoFile = process.env.FLY_APP_NAME 
-    ? `/var/data/${BANCO}`
-    : path.resolve(__dirname, '..', BANCO);
+const onFly = process.env.FLY_APP_NAME !== undefined;
 
-const db = new sqlite3.Database(bancoFile, (err) =>{
+const dbPath = onFly
+    ? `/data/${DB_FILE_NAME}`
+    : path.resolve(__dirname, '..', DB_FILE_NAME);
+
+const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.log('Erro ao conectar o banco de dados', err.message);
+        console.error('Erro ao conectar/abrir o banco de dados:', err.message);
+    } else {
+        console.log(`Conectado ao banco de dados SQLite: ${DB_FILE_NAME}`);
+        
+        db.run('PRAGMA journal_mode = WAL;', (walErr) => {
+            if (walErr) {
+                console.error("Erro ao habilitar modo WAL:", walErr.message);
+            } else {
+                console.log("Modo WAL habilitado com sucesso.");
+                criarTabelasSeNaoExistirem();
+            }
+        });
     }
-    else{
-        console.log(`Conectado ao banco de dados: ${bancoFile}`);
-        criarTabela()
-    }
-})
+});
 
-function criarTabela() {
+function criarTabelasSeNaoExistirem() {
     db.serialize(() => {
         db.run(`
             CREATE TABLE IF NOT EXISTS vagas (
@@ -32,9 +41,9 @@ function criarTabela() {
             )
         `, (err) => {
             if (err) {
-                console.error(" Erro ao criar tabela 'vagas':", err.message);
+                console.error("Erro ao criar tabela 'vagas':", err.message);
             } else {
-                console.log(" Tabela 'vagas' verificada/criada com sucesso.");
+                console.log("Tabela 'vagas' verificada/criada com sucesso.");
             }
         });
     });
